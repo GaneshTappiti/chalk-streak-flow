@@ -3,6 +3,7 @@ import { WelcomeScreen } from "@/components/WelcomeScreen";
 import { LoginScreen } from "@/components/LoginScreen";
 import { StudentDashboard } from "@/components/StudentDashboard";
 import { TeacherDashboard } from "@/components/TeacherDashboard";
+import { CalendarView } from "@/components/CalendarView";
 import { BottomNavigation } from "@/components/BottomNavigation";
 
 type Screen = 'welcome' | 'login' | 'dashboard' | 'calendar' | 'mark-attendance' | 'trends' | 'streaks' | 'alerts' | 'profile' | 'analytics';
@@ -94,8 +95,16 @@ const Index = () => {
         </div>
       )}
       
+      {/* Calendar View */}
+      {currentScreen === 'calendar' && userData && (
+        <CalendarView 
+          userRole={userData.role as 'student' | 'teacher'}
+          onBack={() => setCurrentScreen('dashboard')}
+        />
+      )}
+      
       {/* Placeholder screens for other routes */}
-      {(currentScreen === 'calendar' || currentScreen === 'alerts' || currentScreen === 'profile') && (
+      {(currentScreen === 'alerts' || currentScreen === 'profile') && (
         <div className="min-h-screen flex items-center justify-center pb-20">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-foreground mb-2">
